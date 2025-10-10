@@ -39,7 +39,7 @@ abstract class Address implements JsonSerializable
         $this->zipcode = preg_replace('/[^0-9]/', '', $zipcode);
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'country' => (string)$this->country,

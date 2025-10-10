@@ -2,25 +2,29 @@
 
 namespace Kubinyete\KnightShieldSdk\Domain\Order;
 
+use Stringable;
 use JsonSerializable;
 use Kubinyete\KnightShieldSdk\Shared\Exception\DomainException;
-use Stringable;
 
 class OrderStatus implements Stringable, JsonSerializable
 {
     protected string $value;
 
-    public const STATUS_NEUTRAL                     = 'N';
-    public const STATUS_PAYMENT_HAS_BEEN_APPROVED   = 'A';
-    public const STATUS_PAYMENT_HAS_BEEN_DECLINED   = 'D';
-    public const STATUS_PAYMENT_HAS_BEEN_CANCELED   = 'C';
-    public const STATUS_FRAUD                       = 'F';
+    public const STATUS_NEUTRAL                                 = 'N';
+    public const STATUS_PAYMENT_HAS_BEEN_APPROVED               = 'A';
+    public const STATUS_PAYMENT_HAS_BEEN_DECLINED               = 'D';
+    public const STATUS_PAYMENT_HAS_BEEN_CANCELED               = 'C';
+    public const STATUS_REFUSED_AUTOMATIC_FRAUD_PREVENTION      = 'RA';
+    public const STATUS_REFUSED_MANUAL_FRAUD_PREVENTION         = 'RM';
+    public const STATUS_FRAUD                                   = 'F';
 
     public const ALLOWED = [
         self::STATUS_NEUTRAL,
         self::STATUS_PAYMENT_HAS_BEEN_APPROVED,
         self::STATUS_PAYMENT_HAS_BEEN_DECLINED,
         self::STATUS_PAYMENT_HAS_BEEN_CANCELED,
+        self::STATUS_REFUSED_AUTOMATIC_FRAUD_PREVENTION,
+        self::STATUS_REFUSED_MANUAL_FRAUD_PREVENTION,
         self::STATUS_FRAUD,
     ];
 
@@ -56,6 +60,16 @@ class OrderStatus implements Stringable, JsonSerializable
         return new static(self::STATUS_PAYMENT_HAS_BEEN_CANCELED);
     }
 
+    public static function refusedAutomaticFraudPrevention(): self
+    {
+        return new static(self::STATUS_REFUSED_AUTOMATIC_FRAUD_PREVENTION);
+    }
+
+    public static function refusedManualFraudPrevention(): self
+    {
+        return new static(self::STATUS_REFUSED_MANUAL_FRAUD_PREVENTION);
+    }
+
     public static function fraud(): self
     {
         return new static(self::STATUS_FRAUD);
@@ -66,7 +80,7 @@ class OrderStatus implements Stringable, JsonSerializable
         return $this->value;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'status' => (string)$this

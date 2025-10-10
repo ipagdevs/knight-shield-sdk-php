@@ -32,7 +32,7 @@ class Document implements JsonSerializable, Stringable
         return $value;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'nationality' => (string)$this->nationality,

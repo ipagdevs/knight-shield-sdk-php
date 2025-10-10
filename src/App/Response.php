@@ -3,8 +3,8 @@
 namespace Kubinyete\KnightShieldSdk\App;
 
 use JsonSerializable;
-use Kubinyete\KnightShieldSdk\App\Exception\ResponseRuntimeException;
 use Kubinyete\KnightShieldSdk\Shared\Util\ArrayUtil;
+use Kubinyete\KnightShieldSdk\App\Exception\ResponseRuntimeException;
 
 class Response implements JsonSerializable
 {
@@ -58,7 +58,7 @@ class Response implements JsonSerializable
         return ArrayUtil::get($path, $this->getResponse());
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->body;
     }

@@ -1,3 +1,4 @@
 /vendor/
 .phpunit*
 phpunit.xml
+test.php

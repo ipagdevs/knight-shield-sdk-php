@@ -72,7 +72,7 @@ class Item implements JsonSerializable
     }
 
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'merchant_item_id' => $this->merchant_item_id,
