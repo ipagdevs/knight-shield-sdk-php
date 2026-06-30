@@ -52,7 +52,9 @@ class ApiClient extends Client
 
     protected static function getSupportedApiVersionPath(float $version): ?string
     {
-        return array_key_exists(strval($version), self::SUPPORTED_API_VERSION_MAP) ? self::SUPPORTED_API_VERSION_MAP[$version] : null;
+        return array_key_exists(strval($version), self::SUPPORTED_API_VERSION_MAP) 
+            ? self::SUPPORTED_API_VERSION_MAP[strval($version)] 
+            : null;
     }
 
     //

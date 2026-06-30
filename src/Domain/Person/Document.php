@@ -6,8 +6,6 @@ use Stringable;
 use JsonSerializable;
 use Kubinyete\KnightShieldSdk\Domain\Locale\CountryCode;
 use Kubinyete\KnightShieldSdk\Shared\Exception\DomainException;
-use Kubinyete\KnightShieldSdk\Domain\Person\Validation\DocumentLocaleValidator;
-use Kubinyete\KnightShieldSdk\Domain\Person\Validation\Exception\ValidationNotImplementedException;
 
 class Document implements JsonSerializable, Stringable
 {
@@ -32,7 +30,7 @@ class Document implements JsonSerializable, Stringable
         return $value;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'nationality' => (string)$this->nationality,

@@ -58,7 +58,7 @@ class Response implements JsonSerializable
         return ArrayUtil::get($path, $this->getResponse());
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->body;
     }

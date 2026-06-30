@@ -100,7 +100,7 @@ class Order implements JsonSerializable
         $this->status = $status;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'merchant_order_id' => $this->merchant_order_id,

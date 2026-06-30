@@ -31,7 +31,7 @@ class Factor implements JsonSerializable
         DomainException::assert(is_null($this->with_ip_address) || filter_var($this->with_ip_address, FILTER_VALIDATE_IP), "Should be an valid IP address.");
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'with_ip_address' => $this->with_ip_address,

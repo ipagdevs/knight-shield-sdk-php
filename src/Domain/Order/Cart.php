@@ -26,7 +26,7 @@ class Cart implements JsonSerializable
         $this->items[] = $item;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'items' => array_map(function ($x) {
