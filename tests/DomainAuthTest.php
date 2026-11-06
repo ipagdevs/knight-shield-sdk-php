@@ -12,12 +12,26 @@ class DomainAuthTest extends TestCase
     public function testApiTokenWithInvalidFormatThrowsException()
     {
         $this->expectException(InvalidTokenFormatException::class);
-        $token = new ApiToken('A|123');
+        $token = new ApiToken('1|abc#123');
     }
 
     public function testCanCreateApiTokenWithValidFormat()
     {
         $stringToken = '1|Aigh3pusheirePaiho7ge7eeF5haimoh8aih6che';
+        $token = new ApiToken($stringToken);
+        $this->assertEquals($stringToken, (string)$token);
+    }
+
+    public function testCanCreateApiTokenWithChecksumFormat()
+    {
+        $stringToken = '1|Aigh3pusheirePaiho7ge7eeF5haimoh8aih6che1a2b3c4d';
+        $token = new ApiToken($stringToken);
+        $this->assertEquals($stringToken, (string)$token);
+    }
+
+    public function testCanCreateApiTokenWithPrefixedChecksumFormat()
+    {
+        $stringToken = '1|ks_live-Aigh3pusheirePaiho7ge7eeF5haimoh8aih6che1a2b3c4d';
         $token = new ApiToken($stringToken);
         $this->assertEquals($stringToken, (string)$token);
     }

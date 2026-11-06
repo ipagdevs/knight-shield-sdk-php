@@ -9,6 +9,6 @@ class ApiToken extends Token
 {
     protected function assertTokenFormat(): void
     {
-        InvalidTokenFormatException::assert(preg_match('/^[0-9]+\|[a-zA-Z0-9]{40}$/', $this->token));
+        InvalidTokenFormatException::assert(preg_match('/^[a-zA-Z0-9|_-]+$/', $this->token));
     }
 }

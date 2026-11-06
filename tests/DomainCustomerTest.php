@@ -166,19 +166,20 @@ class DomainCustomerTest extends TestCase
 
     //
 
-    public function testCustomerAgeShouldNotBeTooLow()
+    public function testCustomerBirthDateIsDroppedWhenAgeIsTooLow()
     {
-        $this->expectException(DomainException::class);
         $customer = new Customer(
             null,
             'Vitor Kubinyete',
             new Document(CountryCode::br(), '863.722.120-30', DocumentType::taxId()),
             Gender::masculine(),
-            (new DateTime())->sub(new DateInterval('P9Y')),
+            (new DateTime())->sub(new DateInterval('P6M')),
             new Email('sample@localhost.test'),
             new MobilePhone('+5518998234532'),
             null
         );
+
+        $this->assertNull($customer->jsonSerialize()['birth_date']);
     }
 
     public function testCustomerAgeShouldBeLegal()
